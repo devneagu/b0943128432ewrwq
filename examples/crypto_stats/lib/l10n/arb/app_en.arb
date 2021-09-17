@@ -1,19 +1,31 @@
 {
   "@@locale": "en",
-  "appTitle": "crypto_stats",
+  "appTitle": "CryptoStats",
   "@appTitle": {
-    "description": "The title of the application"
+    "description": "App title"
   },
-  "systemTheme": "System Theme",
-  "@systemTheme": {
-    "description": "Label for system theme"
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome text"
   },
-  "lightTheme": "Light Theme",
-  "@lightTheme": {
-    "description": "Label for light theme"
+  "balance": "Balance",
+  "@balance": {
+    "description": "Balance text"
   },
-  "darkTheme": "Dark Theme",
-  "@darkTheme": {
-    "description": "Label for dark theme"
+  "monthlyProfit": "Monthly Profit",
+  "@monthlyProfit": {
+    "description": "Monthly profit text"
+  },
+  "myPortfolio": "My Portfolio",
+  "@myPortfolio": {
+    "description": "My Portfolio text"
+  },
+  "portfolio": "Portfolio",
+  "@portfolio": {
+    "description": "Portfolio Text"
+  },
+  "rankingList": "Ranking List",
+  "@rankingList": {
+    "description": "Ranking List text"
   }
 }
