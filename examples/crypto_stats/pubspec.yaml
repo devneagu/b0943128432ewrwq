@@ -33,7 +33,16 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 800
 
 flutter_gen:
   # By default, the generate files are in `lib/gen/`
-  output: lib/src/generated
+  output: lib/generated

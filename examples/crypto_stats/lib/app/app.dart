@@ -1,3 +1,5 @@
+import 'package:crypto_stats/crypto_stats/crypto_stats.dart';
+import 'package:crypto_stats/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,10 +14,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: const [],
-      child: const AppView(),
-    );
+    return const AppView();
   }
 }
 
@@ -56,19 +55,10 @@ class AppView extends StatelessWidget {
       // Define a light and dark color theme. Then, read the user's
       // preferred ThemeMode (light, dark, or system default) from the
       // `SettingsBloc` to display the correct theme.
-      theme: ThemeData(),
+      theme: ThemeData(fontFamily: FontFamily.poppins),
       darkTheme: ThemeData.dark(),
 
-      // Define a function to handle named routes in order to support
-      // Flutter web url navigation and deep linking.
-      onGenerateRoute: (RouteSettings routeSettings) {
-        return MaterialPageRoute<void>(
-          settings: routeSettings,
-          builder: (BuildContext context) {
-            return Scaffold();
-          },
-        );
-      },
+      home: const CryptoStatsPage(),
     );
   }
 }
