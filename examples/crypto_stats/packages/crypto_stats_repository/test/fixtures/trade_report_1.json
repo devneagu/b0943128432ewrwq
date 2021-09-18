@@ -1,0 +1,11 @@
+{
+    "time_exchange": "2021-09-18T05:00:20.465928Z",
+    "time_coinapi": "2021-09-18T05:00:20.5295651Z",
+    "uuid": "d803d103-2ffe-4f30-9c78-a8ca667691cd",
+    "price": 3481.24,
+    "size": 0.27478638,
+    "taker_side": "BUY",
+    "symbol_id": "COINBASE_SPOT_ETH_USD",
+    "sequence": 19,
+    "type": "trade"
+}
