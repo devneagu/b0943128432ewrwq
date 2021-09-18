@@ -1,6 +1,9 @@
+import 'package:crypto_stats/crypto_stats/bloc/crypto_stats_bloc.dart';
 import 'package:crypto_stats/generated/assets.gen.dart';
 import 'package:crypto_stats/l10n/l10n.dart';
+import 'package:crypto_stats_repository/crypto_stats_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CryptoStatsPage extends StatelessWidget {
   const CryptoStatsPage({Key? key}) : super(key: key);
@@ -13,7 +16,12 @@ class CryptoStatsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CryptoStatsView();
+    return BlocProvider(
+      create: (_) => CryptoStatsBloc(
+        cryptoStatsRepository: context.read<CryptoStatsRepository>(),
+      )..add(const CryptoStatsSocketConnected()),
+      child: const CryptoStatsView(),
+    );
   }
 }
 
@@ -198,23 +206,46 @@ class PortfolioList extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height / 3,
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        scrollDirection: Axis.horizontal,
-        itemCount: 3,
-        itemBuilder: (context, index) => const AspectRatio(
-          aspectRatio: 1.3 / 1,
-          child: CoinCard(),
-        ),
+      child: BlocBuilder<CryptoStatsBloc, CryptoStatsState>(
+        builder: (context, state) {
+          if (state is CryptoStatsData) {
+            return ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              scrollDirection: Axis.horizontal,
+              itemCount: state.stats.length,
+              itemBuilder: (context, index) => AspectRatio(
+                aspectRatio: 1.3 / 1,
+                child: BlocSelector<CryptoStatsBloc, CryptoStatsState,
+                    TradeReport>(
+                  selector: (state) =>
+                      (state as CryptoStatsData).stats.values.toList()[index],
+                  builder: (context, tradeReport) => CoinCard(
+                    tradeReport: tradeReport,
+                  ),
+                ),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
 }
 
 class CoinCard extends StatelessWidget {
-  const CoinCard({
+  CoinCard({
     Key? key,
+    required this.tradeReport,
   }) : super(key: key);
+
+  final TradeReport tradeReport;
+
+  final Map<CryptoCurrency, ImageProvider> crytoImage = {
+    CryptoCurrency.btc: Assets.images.btc,
+    CryptoCurrency.eth: Assets.images.eth,
+    CryptoCurrency.ada: Assets.images.ada,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -231,22 +262,22 @@ class CoinCard extends StatelessWidget {
             Row(
               children: [
                 Image(
-                  image: Assets.images.eth,
+                  image: crytoImage[tradeReport.crytpType()]!,
                   width: 50,
                 ),
                 const SizedBox(width: 20),
                 RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
+                  text: TextSpan(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'BTC',
+                        text: tradeReport.symbolId.split('_')[2],
                       ),
-                      TextSpan(
+                      const TextSpan(
                         text: '/USD',
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
@@ -254,6 +285,14 @@ class CoinCard extends StatelessWidget {
                   ),
                 )
               ],
+            ),
+            const Spacer(),
+            Text(
+              tradeReport.price.toStringAsFixed(4),
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:crypto_stats/crypto_stats/crypto_stats.dart';
 import 'package:crypto_stats/generated/fonts.gen.dart';
+import 'package:crypto_stats_repository/crypto_stats_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -10,11 +11,23 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 /// {@endtemplate}
 class App extends StatelessWidget {
   /// {@macro app}
-  const App({Key? key}) : super(key: key);
+  const App({
+    Key? key,
+    required this.cryptoStatsRepository,
+  }) : super(key: key);
+
+  final CryptoStatsRepository cryptoStatsRepository;
 
   @override
   Widget build(BuildContext context) {
-    return const AppView();
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<CryptoStatsRepository>.value(
+          value: cryptoStatsRepository,
+        )
+      ],
+      child: const AppView(),
+    );
   }
 }
 

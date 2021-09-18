@@ -12,6 +12,9 @@ environment:
 
 dependencies:
   bloc: ^7.2.0-dev.3
+
+  crypto_stats_repository:
+    path: packages/crypto_stats_repository
   equatable: ^2.0.3
   flutter:
     sdk: flutter

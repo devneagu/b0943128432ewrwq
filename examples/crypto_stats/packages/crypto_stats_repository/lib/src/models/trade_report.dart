@@ -2,6 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'trade_report.g.dart';
 
+enum CryptoCurrency {
+  btc,
+  eth,
+  ada,
+  other,
+}
+
 @JsonSerializable()
 class TradeReport extends Equatable {
   const TradeReport({
@@ -46,6 +53,19 @@ class TradeReport extends Equatable {
 
   @JsonKey(name: 'type')
   final String type;
+
+  CryptoCurrency crytpType() {
+    switch (symbolId) {
+      case 'COINBASE_SPOT_BTC_USD':
+        return CryptoCurrency.btc;
+      case 'COINBASE_SPOT_ETH_USD':
+        return CryptoCurrency.eth;
+      case 'COINBASE_SPOT_ADA_USD':
+        return CryptoCurrency.ada;
+      default:
+        return CryptoCurrency.other;
+    }
+  }
 
   @override
   List<Object?> get props => [

@@ -45,9 +45,9 @@ class CryptoStatsRemoteApi {
           'heartbeat': false,
           'subscribe_data_type': ['trade'],
           'subscribe_filter_symbol_id': [
-            'COINBASE_SPOT_BTC_USD',
-            'COINBASE_SPOT_ETH_USD',
-            'COINBASE_SPOT_ADA_USD',
+            r'COINBASE_SPOT_BTC_USD$',
+            r'COINBASE_SPOT_ETH_USD$',
+            r'COINBASE_SPOT_ADA_USD$',
           ]
         }),
       );
