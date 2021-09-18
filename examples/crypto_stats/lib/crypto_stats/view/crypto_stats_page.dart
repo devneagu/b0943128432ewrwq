@@ -188,7 +188,7 @@ class MyPortfolio extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Text(
-            l10n.myPortfolio,
+            l10n.livePrices,
             style: const TextStyle(fontSize: 18),
           ),
         ),
@@ -226,7 +226,7 @@ class PortfolioList extends StatelessWidget {
               ),
             );
           }
-          return const SizedBox.shrink();
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );
@@ -292,6 +292,13 @@ class CoinCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              tradeReport.takerSide,
+              style: const TextStyle(
+                fontSize: 16,
               ),
             ),
           ],

@@ -16,9 +16,9 @@
   "@monthlyProfit": {
     "description": "Monthly profit text"
   },
-  "myPortfolio": "My Portfolio",
-  "@myPortfolio": {
-    "description": "My Portfolio text"
+  "livePrices": "Live prices",
+  "@livePrices": {
+    "description": "Live prices text"
   },
   "portfolio": "Portfolio",
   "@portfolio": {
